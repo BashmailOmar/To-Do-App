@@ -1,23 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/models/task.dart';
 import 'package:todo_app/screens/add_task_screen.dart';
 import 'package:todo_app/widgets/tasks_list.dart';
+import 'package:todo_app/models/task_data.dart';
+import 'package:provider/provider.dart';
 
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
-
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'name1'),
-    Task(name: 'name2'),
-    Task(name: 'name3'),
-    Task(name: 'name4'),
-    Task(name: 'name5')
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +23,9 @@ class _TasksScreenState extends State<TasksScreen> {
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
                     child: AddTaskScreen((newTaskTitle) {
-                      setState(() {
-                        tasks.add(Task(name: newTaskTitle));
-                      });
+                      // setState(() {
+                      //   tasks.add(Task(name: newTaskTitle));
+                      // });
                       Navigator.pop(context);
                     }),
                   )));
@@ -75,7 +63,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   height: 5,
                 ),
                 Text(
-                  "${tasks.length} tasks",
+                  "${Provider.of<TaskData>(context).taskCount} tasks",
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
@@ -92,7 +80,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30))),
-            child: TasksList(tasks),
+            child: const TasksList(),
           ))
         ],
       ),

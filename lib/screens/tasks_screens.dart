@@ -16,19 +16,16 @@ class TasksScreen extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (context) => SingleChildScrollView(
-                      child: Container(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: AddTaskScreen((newTaskTitle) {
-                      // setState(() {
-                      //   tasks.add(Task(name: newTaskTitle));
-                      // });
-                      Navigator.pop(context);
-                    }),
-                  )));
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: const AddTaskScreen(),
+              ),
+            ),
+          );
         },
       ),
       body: Column(
@@ -68,20 +65,23 @@ class TasksScreen extends StatelessWidget {
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.w500),
-                )
+                ),
               ],
             ),
           ),
           Expanded(
-              child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            decoration: const BoxDecoration(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30))),
-            child: const TasksList(),
-          ))
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
+              child: const TasksList(),
+            ),
+          ),
         ],
       ),
     );
